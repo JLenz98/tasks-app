@@ -1,65 +1,51 @@
-// alert("Hello world!");
+//We listen for the browser to finish loading and then we know it's safe for our DOM manipulation code to run. We can't manipulate HTML elements that haven't loaded yet. Everything inside runs after our page loads.
+window.addEventListener("load", function() {
+  console.log(window);
 
-//Useful for debugging, NOT for communicating to the user
-// console.log("Good afternoon");
-// console.log(2 + 2); = 4
-// console.log(2 + "2"); = 22
-// console.log("2" * 2); = 4
+  //Document Object Model (DOM)
+  console.log(document);
 
-// console.log(true);
-// console.log(false);
-// console.log(2 === 2); Strictly Equal
-// console.log("2" === 2); returns false
-// console.log("2" == 2); returns true (less strict equality operator)
-//In JS, 0 and "" are considered false values
+  //We can select elements in JS in a similar way as CSS. We use document selector methods to do so.
 
-// var myNumber = 5;
+  //document.getElementsByTagName selects elements based on their tag name.  Always returns collection of elements
+  // var headings = document.getElementsByTagName("h1");
 
-// myNumber = 4;
+  //document.getElementById will select an element based on its ID.  Only returns a single value.
+  var heading = document.getElementById("my-heading");
 
-// if (myNumber === 5) {
-//   console.log("It's 5!");
-// } else if (myNumber === 4) {
-//   console.log("It's 4!");
-// } else {
-//   console.log("I don't know what this is...");
-// }
+  var tasks = document.getElementsByClassName("task");
 
-// function sayHi() {
-//   console.log("Hi!");
-// }
+  // document.querySelector was inspired by the jQuery library. It will always return one element, not a collection. If you are searching for a class or an ID, you need to prepend it with a period or pound sign.
+  var taskButton = document.querySelector("#task-button");
+  var taskList = document.querySelector("#task-list");
+  var contentField = document.querySelector("#name");
 
-// sayHi();
+  // document.querySelectorAll() will return a collection of elements, even if it only finds one.
 
-// function numberMultiplier(firstNum, secondNum) {
-//   return firstNum * secondNum;
-// }
 
-// console.log(numberMultiplier(3, 5));
 
-var myArray = [56, 12, 27, 4, 3, 10];
+  // console.log(headings[0]);
+  // heading.style.color = "grey";
 
-// console.log(myArray);
-// console.log(myArray[2]);
-// console.log(myArray.length);
+  heading.addEventListener("click", function() {
+    heading.innerHTML = "To Do:";
+    heading.classList.toggle("big-blue-heading");
+  });
 
-var counter = 1;
-while (counter <= 10) {
-  // console.log(counter);
-  counter++;
-}
+  for (var i = 0; i < tasks.length; i++) {
+    var task = tasks[i];
+    task.addEventListener("click", function() {
+      event.target.classList.toggle("completed");
+    });
+  }
 
-for (var i = 0; i <= 10; i++) {
-  console.log(i);
-}
-
-for (var i = 0; i < myArray.length; i++) {
-  console.log(myArray[i]);
-}
-
-var person = {firstName: "Josh", lastName: "Lenz"};
-console.log(person["firstName"]);
-console.log(person.firstName + " " + person.lastName);
-
-person.age = 20;
-console.log(person);
+  taskButton.addEventListener("click", function() {
+    var newTask = document.createElement("li");
+    newTask.innerHTML = contentField.value;
+    contentField.value = "";
+    taskList.appendChild(newTask);
+    newTask.addEventListener("click", function() {
+      event.target.classList.toggle("completed");
+    });
+  });
+});

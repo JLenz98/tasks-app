@@ -1,3 +1,19 @@
-// Place all the styles related to the Tasks controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+h1 {
+  color: #321cba;
+  transition: 1s linear;
+  text-align: center;
+}
+
+.big-blue-heading {
+  color: gray;
+  /*font-size: 5rem;*/
+  /*transition-duration: 1000ms;*/
+  transform: scale(1.3);
+  transform-origin: center;
+  transition: 1s linear;
+}
+
+.completed {
+  color: red;
+  text-decoration: line-through;
+}

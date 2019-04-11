@@ -1,1 +1,12 @@
-<h1>This is your To Do List:</h1>
+<h1 id="my-heading">This is your To Do List:</h1>
+
+<%= form_tag("/tasks", method: :post) do %>
+  <%= text_field_tag(:name) %>
+  <%= submit_tag("New Task", id: "task-button") %>
+<% end %>
+
+<ul id="task-list">
+  <% @tasks.each do |task| %>
+    <li data-id="<%= task.id %>" class="task <%= "completed" if task.completed? %>"><%= task.name %></li>
+  <% end %>
+</ul>
